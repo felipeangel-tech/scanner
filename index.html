@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Scan2PDF</title>
+
+  <!-- PWA / iOS -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Scan2PDF" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Scan<span>2</span>PDF</h1>
+    <span id="pageCount" class="badge">0 pages</span>
+  </header>
+
+  <!-- Camera view -->
+  <section id="cameraView" class="camera-view">
+    <video id="video" playsinline autoplay muted></video>
+    <div class="reticle"></div>
+    <div class="cam-controls">
+      <button id="filterBtn" class="round" title="Filter">Auto</button>
+      <button id="shutterBtn" class="shutter" aria-label="Capture"></button>
+      <label id="importBtn" class="round" title="Import from gallery">
+        <span>＋</span>
+        <input id="fileInput" type="file" accept="image/*" multiple hidden />
+      </label>
+    </div>
+    <button id="reviewBtn" class="review-fab" hidden>Review &amp; Export →</button>
+  </section>
+
+  <!-- Pages / review view -->
+  <section id="reviewView" class="review-view" hidden>
+    <div id="pages" class="pages"></div>
+    <div class="review-actions">
+      <button id="backBtn" class="secondary">← Scan more</button>
+      <button id="exportBtn" class="primary">Export PDF</button>
+      <button id="shareBtn" class="primary">Share</button>
+    </div>
+  </section>
+
+  <canvas id="work" hidden></canvas>
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
