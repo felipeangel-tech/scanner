@@ -16,16 +16,18 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <h1>Scan<span>2</span>PDF</h1>
-    <span id="pageCount" class="badge">0 pages</span>
-  </header>
-
-  <!-- Camera view -->
+  <!-- ============ Camera view ============ -->
   <section id="cameraView" class="camera-view">
     <video id="video" playsinline autoplay muted></video>
     <canvas id="overlay" class="overlay"></canvas>
-    <div id="hint" class="hint">Loading scanner…</div>
+
+    <header class="cam-topbar">
+      <h1 class="logo">Scan<span>2</span>PDF</h1>
+      <button id="torchBtn" class="icon-btn" title="Flash" hidden>🔦</button>
+    </header>
+
+    <div id="hint" class="hint"><span class="spinner" id="hintSpinner"></span><span id="hintText">Starting camera…</span></div>
+
     <div class="cam-controls">
       <button id="filterBtn" class="round" title="Filter">Auto</button>
       <button id="shutterBtn" class="shutter" aria-label="Capture"></button>
@@ -35,18 +37,56 @@
         <input id="fileInput" type="file" accept="image/*" multiple hidden />
       </label>
     </div>
-    <button id="reviewBtn" class="review-fab" hidden>Review &amp; Export →</button>
+
+    <button id="reviewBtn" class="review-fab" hidden>
+      <span id="reviewFabCount" class="fab-count">0</span> Review &amp; Export →
+    </button>
   </section>
 
-  <!-- Pages / review view -->
+  <!-- ============ Review view ============ -->
   <section id="reviewView" class="review-view" hidden>
+    <header class="review-topbar">
+      <button id="backBtn" class="icon-btn" aria-label="Back to camera">←</button>
+      <input id="docName" class="doc-name" type="text" placeholder="Document name" />
+      <button id="clearBtn" class="icon-btn danger" aria-label="Clear all">🗑</button>
+    </header>
+
     <div id="pages" class="pages"></div>
-    <div class="review-actions">
-      <button id="backBtn" class="secondary">← Scan more</button>
-      <button id="exportBtn" class="primary">Export PDF</button>
-      <button id="shareBtn" class="primary">Share</button>
+
+    <div class="review-bottom">
+      <div class="opt-row">
+        <label class="opt">Page size
+          <select id="formatSel">
+            <option value="auto">Fit to scan</option>
+            <option value="a4">A4</option>
+            <option value="letter">Letter</option>
+          </select>
+        </label>
+        <span id="reviewCount" class="muted-count">0 pages</span>
+      </div>
+      <div class="review-actions">
+        <button id="exportBtn" class="secondary">⤓ Save PDF</button>
+        <button id="shareBtn" class="primary">⤴ Share PDF</button>
+      </div>
     </div>
   </section>
+
+  <!-- ============ Fullscreen page viewer ============ -->
+  <div id="viewer" class="viewer" hidden>
+    <div class="viewer-top">
+      <span id="viewerLabel" class="viewer-label">1 / 1</span>
+      <button id="viewerClose" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+    <div class="viewer-stage">
+      <button id="viewerPrev" class="nav-btn" aria-label="Previous">‹</button>
+      <img id="viewerImg" alt="Page" />
+      <button id="viewerNext" class="nav-btn" aria-label="Next">›</button>
+    </div>
+    <div class="viewer-actions">
+      <button id="viewerRotate" class="secondary">⟳ Rotate</button>
+      <button id="viewerDelete" class="danger-btn">🗑 Delete</button>
+    </div>
+  </div>
 
   <canvas id="work" hidden></canvas>
   <canvas id="detect" hidden></canvas>

@@ -1,4 +1,4 @@
-const CACHE = 'scan2pdf-v2';
+const CACHE = 'scan2pdf-v3';
 const ASSETS = [
   './',
   './index.html',
