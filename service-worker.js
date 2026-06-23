@@ -1,4 +1,4 @@
-const CACHE = 'scan2pdf-v1';
+const CACHE = 'scan2pdf-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -6,6 +6,8 @@ const ASSETS = [
   './app.js',
   './manifest.json',
   './vendor/jspdf.umd.min.js',
+  './vendor/opencv.js',
+  './vendor/jscanify.min.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-180.png'

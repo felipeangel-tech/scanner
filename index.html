@@ -24,10 +24,12 @@
   <!-- Camera view -->
   <section id="cameraView" class="camera-view">
     <video id="video" playsinline autoplay muted></video>
-    <div class="reticle"></div>
+    <canvas id="overlay" class="overlay"></canvas>
+    <div id="hint" class="hint">Loading scanner…</div>
     <div class="cam-controls">
       <button id="filterBtn" class="round" title="Filter">Auto</button>
       <button id="shutterBtn" class="shutter" aria-label="Capture"></button>
+      <button id="cropBtn" class="round" title="Toggle edge detection">Edges</button>
       <label id="importBtn" class="round" title="Import from gallery">
         <span>＋</span>
         <input id="fileInput" type="file" accept="image/*" multiple hidden />
@@ -47,9 +49,12 @@
   </section>
 
   <canvas id="work" hidden></canvas>
+  <canvas id="detect" hidden></canvas>
   <div id="toast" class="toast" hidden></div>
 
   <script src="vendor/jspdf.umd.min.js"></script>
+  <script async src="vendor/opencv.js"></script>
+  <script src="vendor/jscanify.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
